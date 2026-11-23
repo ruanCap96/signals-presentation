@@ -10,19 +10,45 @@
     <title>Angular Signals · Part 1 Read-along</title>
     <style>
       :root {
-        color-scheme: light;
+        color-scheme: dark;
         font-family:
           Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        color: #172033;
-        background: #edf0f6;
+        color: var(--ink);
+        background: var(--bg);
         font-synthesis: none;
         text-rendering: optimizeLegibility;
+        --bg: #0f1218;
+        --paper: #171c25;
+        --ink: #e8ecf3;
+        --muted: #9aa4b6;
+        --accent: #ff4f8b;
+        --line: #2a3140;
+        --code: #0b0e14;
+        --code-ink: #e8ecf3;
+        --code-label: #8b95a7;
+        --inline-code-bg: #232a37;
+        --inline-code-ink: #ff7aa8;
+        --note-bg: rgb(255 79 139 / 8%);
+        --note-ink: #c3cad6;
+        --shadow: rgb(0 0 0 / 35%);
+      }
+
+      :root[data-theme="light"] {
+        color-scheme: light;
+        --bg: #edf0f6;
+        --paper: #fff;
         --ink: #172033;
         --muted: #59657a;
         --accent: #c61b6e;
         --line: #dde2ed;
         --code: #172033;
-        --paper: #fff;
+        --code-ink: #eff2f8;
+        --code-label: #aeb8ca;
+        --inline-code-bg: #f0f2f7;
+        --inline-code-ink: #a5165c;
+        --note-bg: #fbf2f7;
+        --note-ink: #434d61;
+        --shadow: rgb(23 32 51 / 8%);
       }
 
       * {
@@ -68,6 +94,13 @@
         cursor: pointer;
       }
 
+      .toolbar .theme-toggle {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--ink);
+        font-weight: 600;
+      }
+
       .toolbar .download {
         padding: 10px 14px;
         border: 1px solid var(--accent);
@@ -86,7 +119,7 @@
         border: 1px solid var(--line);
         border-radius: 16px;
         background: var(--paper);
-        box-shadow: 0 8px 32px rgb(23 32 51 / 8%);
+        box-shadow: 0 8px 32px var(--shadow);
       }
 
       .eyebrow,
@@ -180,12 +213,12 @@
         overflow: hidden;
         border-radius: 12px;
         background: var(--code);
-        color: #eff2f8;
+        color: var(--code-ink);
       }
 
       .code-label {
         padding: 10px 14px 0;
-        color: #aeb8ca;
+        color: var(--code-label);
         font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.1em;
@@ -212,8 +245,8 @@
       .pill code {
         padding: 2px 5px;
         border-radius: 4px;
-        background: #f0f2f7;
-        color: #a5165c;
+        background: var(--inline-code-bg);
+        color: var(--inline-code-ink);
         font-size: 0.9em;
       }
 
@@ -243,11 +276,11 @@
         padding: 14px 16px;
         border-left: 3px solid var(--accent);
         border-radius: 0 8px 8px 0;
-        background: #fbf2f7;
+        background: var(--note-bg);
       }
 
       .note p {
-        color: #434d61;
+        color: var(--note-ink);
         font-size: 13px;
         line-height: 1.55;
       }
@@ -305,7 +338,7 @@
           max-width: none;
           margin: 0;
           padding: 0;
-          background: white;
+          background: var(--paper);
         }
 
         .toolbar {
@@ -363,12 +396,42 @@
     </style>
   </head>
   <body>
+    <script>
+      (() => {
+        const root = document.documentElement;
+        const apply = (theme) => {
+          if (theme === 'light') root.dataset.theme = 'light';
+          else delete root.dataset.theme;
+          const toggle = document.getElementById('theme-toggle');
+          if (toggle) {
+            toggle.textContent = theme === 'light' ? 'Dark mode' : 'Light mode';
+            toggle.setAttribute('aria-pressed', String(theme === 'light'));
+          }
+        };
+        let theme = 'dark';
+        try {
+          theme = localStorage.getItem('read-along-theme') === 'light' ? 'light' : 'dark';
+        } catch {}
+        apply(theme);
+        document.addEventListener('DOMContentLoaded', () => {
+          apply(theme);
+          document.getElementById('theme-toggle').addEventListener('click', () => {
+            theme = theme === 'light' ? 'dark' : 'light';
+            try {
+              localStorage.setItem('read-along-theme', theme);
+            } catch {}
+            apply(theme);
+          });
+        });
+      })();
+    </script>
     <div class="toolbar">
       <nav aria-label="Presentation links">
         <a href="./">Interactive presentation</a>
         <span>Part 1 · read-along edition</span>
       </nav>
       <nav aria-label="Read-along actions">
+        <button class="theme-toggle" type="button" id="theme-toggle" aria-pressed="false">Light mode</button>
         <a class="download" href="assets/angular-signals-part-1.pdf" download>Download PDF</a>
         <button type="button" onclick="window.print()">Print / save as PDF</button>
       </nav>
