@@ -111,7 +111,7 @@
 
       .slide {
         display: grid;
-        grid-template-rows: auto auto 1fr auto;
+        grid-template-rows: auto 1fr auto auto;
         gap: 18px;
         min-height: 640px;
         margin: 0 0 24px;
@@ -157,6 +157,10 @@
         letter-spacing: -0.035em;
       }
 
+      header h2 {
+        margin-top: 8px;
+      }
+
       h3 {
         margin-bottom: 8px;
         font-size: 15px;
@@ -175,6 +179,15 @@
         align-content: center;
         align-items: center;
         gap: 28px;
+      }
+
+      .cover .subtitle {
+        margin-top: 18px;
+      }
+
+      .cover .content {
+        align-content: start;
+        margin-top: 12px;
       }
 
       .content.single {
@@ -433,14 +446,13 @@
       <nav aria-label="Read-along actions">
         <button class="theme-toggle" type="button" id="theme-toggle" aria-pressed="false">Light mode</button>
         <a class="download" href="assets/angular-signals-part-1.pdf" download>Download PDF</a>
-        <button type="button" onclick="window.print()">Print / save as PDF</button>
       </nav>
     </div>
 
     <main>
-      <article class="slide">
+      <article class="slide cover">
         <header>
-          <div class="eyebrow">Angular Signals · Part 1 · 23 minutes</div>
+          <div class="eyebrow">Angular Signals · Part 1</div>
           <h1>What is it,<br />and what can we do <em>with it?</em></h1>
           <p class="subtitle">A practical introduction to signals in Angular component state.</p>
         </header>
@@ -459,16 +471,12 @@
             <p class="body-copy">The RxJS comparison is optional background, not a prerequisite.</p>
           </div>
         </div>
-        <aside class="note">
-          <p><strong>Facilitator note.</strong> Ask who has used signals before. Leave time for questions.</p>
-          <p>These pages show all demo steps at once so colleagues can read them at their own pace.</p>
-        </aside>
         <footer class="page-foot"><span>Frontend · knowledge sharing</span><span>01 / 10</span></footer>
       </article>
 
       <article class="slide">
         <header>
-          <div class="eyebrow">02 · What is a signal? · 2 min</div>
+          <div class="eyebrow">02 · What is a signal?</div>
           <h2>A signal holds a value Angular can track.</h2>
         </header>
         <div class="content">
@@ -499,7 +507,7 @@ function shout() {
           </div>
         </div>
         <aside class="note">
-          <p><strong>Explain.</strong> Calling a signal is its getter and tells Angular this consumer read it.</p>
+          <p><strong>Why call it?</strong> Calling a signal returns its value and tells Angular who read it.</p>
           <p><strong>Gotcha.</strong> In a template use <code>firstName()</code>, not <code>firstName</code>. The latter refers to the signal, not its value. Signal reads are cheap getters—not work-heavy methods.</p>
         </aside>
         <footer class="page-foot"><span>Angular Signals · Read-along</span><span>02 / 10</span></footer>
@@ -507,7 +515,7 @@ function shout() {
 
       <article class="slide">
         <header>
-          <div class="eyebrow">03 · Before &amp; after · 2 min</div>
+          <div class="eyebrow">03 · Before &amp; after</div>
           <h2>Signals tell Angular which value changed.</h2>
         </header>
         <div class="content">
@@ -544,15 +552,15 @@ birthday() {
           </div>
         </div>
         <aside class="note">
-          <p><strong>Say.</strong> “Signals and change detection work together.” Angular still refreshes views; signals provide precise dependency information.</p>
-          <p><strong>Avoid.</strong> Don’t claim Angular patches only the individual template expression or that plain-field code is broken. This is about explicit reactive state, not a requirement to migrate every field.</p>
+          <p><strong>Key point.</strong> Signals and change detection work together. Angular still refreshes views; signals tell it precisely which state each view depends on.</p>
+          <p><strong>Note.</strong> Angular doesn’t patch individual template expressions, and plain-field code isn’t broken. Signals make reactive state explicit; you don’t have to migrate every field.</p>
         </aside>
         <footer class="page-foot"><span>Angular Signals · Read-along</span><span>03 / 10</span></footer>
       </article>
 
       <article class="slide">
         <header>
-          <div class="eyebrow">04 · Why signals? · 3 min</div>
+          <div class="eyebrow">04 · Why signals?</div>
           <h2>Who reads the value that changed?</h2>
         </header>
         <div class="content">
@@ -586,15 +594,14 @@ birthday() {
           </div>
         </div>
         <aside class="note">
-          <p><strong>Facilitator note.</strong> Ask “who cares about age?” before revealing the readers.</p>
-          <p><strong>Precision.</strong> The live demo uses <code>computed()</code> values as stand-ins for view consumers. In an application, Angular marks the components that read a signal; don’t say it patches a single template line.</p>
+                    <p><strong>In an application.</strong> Angular marks the components that read a changed signal for refresh. The interactive demo uses <code>computed()</code> values as stand-ins for those components.</p>
         </aside>
         <footer class="page-foot"><span>Angular Signals · Read-along</span><span>04 / 10</span></footer>
       </article>
 
       <article class="slide">
         <header>
-          <div class="eyebrow">05 · Coming from RxJS? · Optional · 2 min</div>
+          <div class="eyebrow">05 · Coming from RxJS? · Optional</div>
           <h2>For a current UI value, a signal is direct.</h2>
         </header>
         <div class="content">
@@ -629,14 +636,14 @@ rename() {
         </div>
         <aside class="note">
           <p><strong>Key point.</strong> This is a simpler way to read a current UI value—not a claim that Observables are obsolete.</p>
-          <p>RxJS remains useful for streams of events, async composition, timing, cancellation, and other stream-oriented work. Skip this page if the room doesn’t use RxJS.</p>
+          <p>RxJS remains useful for streams of events, async composition, timing, cancellation, and other stream-oriented work.</p>
         </aside>
         <footer class="page-foot"><span>Angular Signals · Read-along</span><span>05 / 10</span></footer>
       </article>
 
       <article class="slide">
         <header>
-          <div class="eyebrow">06 · Who uses signals, and where? · 3 min</div>
+          <div class="eyebrow">06 · Who uses signals, and where?</div>
           <h2>Component state can be local or shared.</h2>
         </header>
         <div class="content">
@@ -678,7 +685,7 @@ counter = inject(CounterService);
 
       <article class="slide">
         <header>
-          <div class="eyebrow">07 · Computed · 4 min</div>
+          <div class="eyebrow">07 · Computed</div>
           <h2>Derive values with <code>computed()</code>.</h2>
         </header>
         <div class="content">
@@ -709,15 +716,14 @@ function rename() {
           </div>
         </div>
         <aside class="note">
-          <p><strong>Ask.</strong> Predict the full name before reading the computed result.</p>
-          <p><strong>Extra detail.</strong> Computed values are lazy and memoized: after a dependency changes, Angular recomputes when the computed is next read. There is no <code>fullName.set()</code>.</p>
+                    <p><strong>Good to know.</strong> Computed values are lazy and memoized: after a dependency changes, Angular recomputes when the computed is next read. There is no <code>fullName.set()</code>.</p>
         </aside>
         <footer class="page-foot"><span>Angular Signals · Read-along</span><span>07 / 10</span></footer>
       </article>
 
       <article class="slide">
         <header>
-          <div class="eyebrow">08 · Test your knowledge · 3 min</div>
+          <div class="eyebrow">08 · Test your knowledge</div>
           <h2>Mutate an object—or replace it?</h2>
         </header>
         <div class="content">
@@ -751,8 +757,8 @@ age = computed(() => user().age);</code></pre>
           </div>
         </div>
         <aside class="note">
-          <p><strong>Ask first.</strong> “If we do <code>user().age += 1</code>, what happens?” With the demo’s cached <code>computed()</code>, it stays at 30.</p>
-          <p><strong>Show the punchline.</strong> Now replace the object with <code>update()</code>; after the earlier mutation the age jumps 30 → 32. The property changed silently; the later replacement is what notifies the signal.</p>
+          <p><strong>Mutation.</strong> After <code>user().age += 1</code>, the cached <code>computed()</code> still reports 30.</p>
+          <p><strong>Replacement.</strong> Replacing the object with <code>update()</code> after that mutation makes the age jump from 30 to 32. The mutation changed the value silently; only the replacement notified the signal.</p>
           <p><strong>Takeaway.</strong> For objects and arrays, replace instead of mutating. Arrays: <code>[...items, newItem]</code>, not <code>items.push(newItem)</code>. Spread is shallow, so copy nested objects too when they change.</p>
         </aside>
         <footer class="page-foot"><span>Angular Signals · Read-along</span><span>08 / 10</span></footer>
@@ -760,7 +766,7 @@ age = computed(() => user().age);</code></pre>
 
       <article class="slide">
         <header>
-          <div class="eyebrow">09 · Recap · 2 min</div>
+          <div class="eyebrow">09 · Recap</div>
           <h2>What? Why? How does it simplify state?</h2>
         </header>
         <div class="content">
@@ -793,7 +799,7 @@ ngOnDestroy() {
           </div>
         </div>
         <aside class="note">
-          <p><strong>Be precise.</strong> Reading a signal creates no subscription to clean up. Manual Observable subscriptions may need lifecycle cleanup; the <code>async</code> pipe already manages its own subscription.</p>
+          <p><strong>Cleanup.</strong> Reading a signal creates no subscription to clean up. Manual Observable subscriptions may need lifecycle cleanup; the <code>async</code> pipe already manages its own subscription.</p>
           <p><code>ngOnDestroy</code> is still useful for other cleanup, such as timers and event listeners. This example compares manual subscription, not the async pipe.</p>
         </aside>
         <footer class="page-foot"><span>Angular Signals · Read-along</span><span>09 / 10</span></footer>
@@ -801,7 +807,7 @@ ngOnDestroy() {
 
       <article class="slide">
         <header>
-          <div class="eyebrow">10 · What comes next? · 1 min</div>
+          <div class="eyebrow">10 · What comes next?</div>
           <h2>The signal story continues.</h2>
           <p class="subtitle">Four APIs connect state, side effects, async data, and RxJS.</p>
         </header>
@@ -824,7 +830,7 @@ ngOnDestroy() {
           </div>
         </div>
         <aside class="note">
-          <p><strong>Wrap up.</strong> Invite colleagues to use the interactive presentation and experiment with the examples. Keep this page as the printable summary; consult Angular’s current guide before adopting APIs in production.</p>
+          <p><strong>Try it yourself.</strong> The interactive presentation lets you run every example. Check Angular’s current guide before adopting these APIs in production.</p>
         </aside>
         <footer class="page-foot"><span>Frontend · Questions</span><span>10 / 10</span></footer>
       </article>
