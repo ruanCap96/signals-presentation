@@ -1,0 +1,34 @@
+<app-definition source="essentials/signals#computed-expressions"
+  >Signals you call inside <code>computed()</code> become its <em>dependencies</em>. It's
+  read-only.</app-definition
+>
+<section class="stage">
+  <app-live-editor [live]="live" />
+  <div class="live">
+    <span class="live-tag">LIVE</span>
+    <div class="deps">
+      <div>
+        <small>firstName()</small>
+        <strong data-testid="first-name">{{ live.scope().firstName() | show }}</strong>
+      </div>
+      <div>
+        <small>lastName()</small>
+        <strong data-testid="last-name">{{ live.scope().lastName() | show }}</strong>
+      </div>
+    </div>
+    @if (live.scope().fullName; as fullName) {
+      <div class="deps-arrow reveal" aria-hidden="true">↓ depends on both</div>
+      <div class="deps-result reveal">
+        <small>fullName()</small>
+        <div class="accent" data-testid="full-name">{{ fullName() | show }}</div>
+      </div>
+    }
+    @if (live.scope().rename; as rename) {
+      <div class="actions">
+        <button type="button" class="reveal" data-testid="rename" (click)="live.call(rename)">
+          <code>rename()</code>
+        </button>
+      </div>
+    }
+  </div>
+</section>

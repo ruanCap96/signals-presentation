@@ -1,0 +1,26 @@
+<div class="playground">
+  <div class="actions">
+    <button type="button" data-testid="run-code" (click)="run()" [disabled]="running()">
+      {{ running() ? 'Running…' : 'Run' }}
+    </button>
+    <button type="button" class="ghost" data-testid="reset-code" (click)="reset()">
+      Reset code
+    </button>
+  </div>
+  <textarea
+    aria-label="Playground code"
+    spellcheck="false"
+    autocapitalize="off"
+    autocomplete="off"
+    [value]="source()"
+    (input)="edit($event)"
+    (keydown)="onKeydown($event)"
+  ></textarea>
+  <div class="playground-output" role="status" aria-live="polite">
+    <small>Output</small>
+    <pre data-testid="code-output">{{ output() }}</pre>
+    @if (error()) {
+      <p class="playground-error" data-testid="code-error">{{ error() }}</p>
+    }
+  </div>
+</div>

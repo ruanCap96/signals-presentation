@@ -1,0 +1,28 @@
+<section class="definitions">
+  <app-definition>Create and manage dynamic data.</app-definition>
+</section>
+<section class="stage">
+  <app-live-editor [live]="live" />
+  <div class="live">
+    <span class="live-tag">LIVE</span>
+    <small class="muted"><code>firstName()</code></small>
+    <div class="big accent" data-testid="what-value">{{ live.scope().firstName() | show }}</div>
+    <div class="actions">
+      @if (live.scope().rename; as rename) {
+        <button type="button" class="reveal" data-testid="what-set" (click)="live.call(rename)">
+          <code>rename()</code>
+        </button>
+      }
+      @if (live.scope().shout; as shout) {
+        <button
+          type="button"
+          class="ghost reveal"
+          data-testid="what-update"
+          (click)="live.call(shout)"
+        >
+          <code>shout()</code>
+        </button>
+      }
+    </div>
+  </div>
+</section>

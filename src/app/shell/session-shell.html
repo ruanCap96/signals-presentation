@@ -1,0 +1,73 @@
+<div class="progress" [style.width.%]="progress()"></div>
+
+<main class="slide" [attr.data-slide]="slide().id">
+  @if (!slide().hero) {
+    <header class="slide-head">
+      <h1>{{ slide().title }}</h1>
+      @if (slide().lead) {
+        <p class="lead">{{ slide().lead }}</p>
+      }
+    </header>
+  }
+
+  @for (key of [renderKey()]; track key) {
+    <ng-container *ngComponentOutlet="slide().component" />
+  }
+</main>
+
+@if (notesVisible()) {
+  <aside class="notes" data-testid="notes">{{ slide().notes }}</aside>
+}
+
+<footer class="controls">
+  <button
+    type="button"
+    class="ghost"
+    aria-label="Previous slide"
+    [disabled]="slideIndex() === 0"
+    (click)="goTo(slideIndex() - 1)"
+  >
+    ←
+  </button>
+  <select aria-label="Jump to slide" [value]="slideIndex()" (change)="chooseSlide($event)">
+    @for (s of slides(); track s.id; let i = $index) {
+      <option [value]="i" [selected]="i === slideIndex()">{{ i + 1 }}. {{ s.title }}</option>
+    }
+  </select>
+  <button
+    type="button"
+    class="ghost"
+    aria-label="Next slide"
+    [disabled]="slideIndex() === slides().length - 1"
+    (click)="goTo(slideIndex() + 1)"
+  >
+    →
+  </button>
+  @if (steps()?.nextLabel(); as label) {
+    <button
+      type="button"
+      class="step-next"
+      data-testid="next-step"
+      [attr.aria-label]="'Next step: ' + label"
+      (click)="steps()!.next()"
+    >
+      <span class="step-count">{{ steps()!.current() + 1 }}/{{ steps()!.total }}</span>
+      <code>{{ label }}</code> →
+    </button>
+  }
+  <span class="spacer"></span>
+  @if (slide().interactive) {
+    <button type="button" class="ghost" data-testid="reset" (click)="resetDemo()">
+      Reset demo
+    </button>
+  }
+  <button type="button" class="ghost" data-testid="toggle-notes" (click)="toggleNotes()">
+    Notes (N)
+  </button>
+  <button type="button" class="ghost" data-testid="restart" (click)="resetAll()">Restart</button>
+  <nav class="session-links" aria-label="Sessions">
+    @for (link of links; track link.path) {
+      <a [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
+    }
+  </nav>
+</footer>

@@ -1,0 +1,37 @@
+<figure class="code live-editor" [class.has-error]="live().error()">
+  <figcaption>
+    <span>✎ Edit me · LIVE updates as you type</span>
+    <button
+      type="button"
+      class="ghost small"
+      data-testid="reset-code"
+      [disabled]="!live().edited()"
+      (click)="live().reset()"
+    >
+      Reset code
+    </button>
+  </figcaption>
+  <div class="editor">
+    <pre
+      aria-hidden="true"
+    ><code>@for (line of lines(); track $index) {<span class="line">@for (t of line; track $index) {<span [class]="'tok-' + t.kind">{{ t.text }}</span>}&#8203;</span>}</code></pre>
+    <textarea
+      aria-label="Live code"
+      data-testid="live-code"
+      spellcheck="false"
+      autocapitalize="off"
+      autocomplete="off"
+      wrap="off"
+      [value]="live().source()"
+      (input)="edit($event)"
+    ></textarea>
+  </div>
+  @if (live().error(); as error) {
+    <p class="live-error" role="status" data-testid="live-error">
+      ⚠ {{ error }} <span>· LIVE shows the last working version</span>
+    </p>
+  }
+  @if (note()) {
+    <figcaption class="code-note">{{ note() }}</figcaption>
+  }
+</figure>

@@ -1,0 +1,36 @@
+<section class="recap">
+  <dl class="qa">
+    <div>
+      <dt>What are signals?</dt>
+      <dd class="step" data-testid="answer-what" [class.step-hidden]="steps.current() < 1">
+        A value that <em>tells Angular when it changes</em>.
+        <small
+          ><code>signal()</code> · <code>name()</code> · <code>set()</code> /
+          <code>update()</code></small
+        >
+      </dd>
+    </div>
+    <div>
+      <dt>Why were they introduced?</dt>
+      <dd class="step" data-testid="answer-why" [class.step-hidden]="steps.current() < 2">
+        Angular knows <em>who reads what</em>.
+        <small>A change only concerns its readers.</small>
+      </dd>
+    </div>
+    <div>
+      <dt>How do they simplify component state?</dt>
+      <dd class="step" data-testid="answer-how" [class.step-hidden]="steps.current() < 3">
+        <em>Just read the value.</em>
+        <small>No subscribe or unsubscribe. <code>computed()</code> keeps the rest in sync.</small>
+      </dd>
+    </div>
+  </dl>
+  <div
+    class="recap-side step"
+    data-testid="recap-example"
+    [class.step-hidden]="steps.current() < 4"
+  >
+    <app-code file="before · subscribe + unsubscribe" [code]="before" />
+    <app-code file="after · signal" [code]="after" />
+  </div>
+</section>

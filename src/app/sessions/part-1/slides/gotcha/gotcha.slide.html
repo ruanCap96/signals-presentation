@@ -1,0 +1,37 @@
+<app-definition label="Hint" data-testid="hint" source="guide/signals#signal-equality-functions"
+  >A signal only notices a <em>NEW value</em>.</app-definition
+>
+<app-code [code]="setup" />
+<section class="versus">
+  <article class="side step" [class.step-hidden]="steps.current() < 1">
+    <span class="tag before">? Mutate</span>
+    <app-code [code]="mutate" />
+    <p class="result">
+      <button type="button" data-testid="mutate" (click)="mutateUser()">Mutate age</button>
+    </p>
+  </article>
+  <article class="side step" [class.step-hidden]="steps.current() < 2">
+    <span class="tag now">✓ Replace</span>
+    <app-code [code]="replace" />
+    <p class="result">
+      <button type="button" data-testid="replace" (click)="replaceUser()">Update user</button>
+    </p>
+  </article>
+</section>
+<div class="pair center">
+  <div>
+    <small
+      ><span data-testid="user-name">{{ user().name }}</span> · age() (computed)</small
+    >
+    <div class="big accent" data-testid="user-age">{{ age() }}</div>
+  </div>
+</div>
+<app-definition
+  class="step"
+  label="Remember"
+  data-testid="remember"
+  source="guide/signals#signal-equality-functions"
+  [class.step-hidden]="steps.current() < 3"
+  >Data can change <em>without the signal knowing</em>. Only <code>set()</code> /
+  <code>update()</code> with a <em>new value</em> tells Angular.</app-definition
+>

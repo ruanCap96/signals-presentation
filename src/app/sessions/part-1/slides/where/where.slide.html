@@ -1,0 +1,34 @@
+<app-definition source="essentials/signals#using-signals-in-components"
+  >Use signals in a component to <em>create and manage state</em>.</app-definition
+>
+<section class="where">
+  <div class="where-list">
+    <span class="tag before">In your code</span>
+    <app-code file="in a component · local UI state" [code]="component" />
+    <app-code
+      class="step"
+      file="in a service · shared state"
+      [class.step-hidden]="steps.current() < 1"
+      [code]="service"
+    />
+  </div>
+  <article class="where-example step" [class.step-hidden]="steps.current() < 2">
+    <span class="tag now">In practice · notification component</span>
+    <app-code [code]="example" />
+    <div class="live">
+      <span class="live-tag">LIVE</span>
+      @if (!hidden()) {
+        <div class="notice" data-testid="notice">
+          <span>Application TD-0042 was updated.</span>
+          <button type="button" class="ghost" data-testid="dismiss" (click)="hidden.set(true)">
+            ✕
+          </button>
+        </div>
+      } @else {
+        <button type="button" class="ghost" data-testid="show-again" (click)="hidden.set(false)">
+          Show again
+        </button>
+      }
+    </div>
+  </article>
+</section>

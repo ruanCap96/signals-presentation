@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting · Angular Signals</title>
+    <script>
+      const base = '/signals-presentation';
+      const route = location.pathname.slice(base.length) + location.search + location.hash;
+      location.replace(`${base}/?__ghPagesRoute=${encodeURIComponent(route || '/')}`);
+    </script>
+  </head>
+  <body></body>
+</html>

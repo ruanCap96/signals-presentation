@@ -1,0 +1,6 @@
+<figure class="code">
+  @if (file()) {
+    <figcaption>{{ file() }}</figcaption>
+  }
+  <pre><code>@for (line of lines(); track $index) {<span class="line">@for (t of line; track $index) {<span [class]="'tok-' + t.kind">{{ t.text }}</span>}&#8203;</span>}</code></pre>
+</figure>

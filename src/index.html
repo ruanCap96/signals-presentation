@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Signal / Lab - Angular Signals</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A hands-on introduction to Angular Signals: interactive slides, real demos, and shareable source."
+    />
+    <script>
+      const basePath = new URL(document.querySelector('base').href).pathname.replace(/\/$/, '');
+      const route = new URL(location.href).searchParams.get('__ghPagesRoute');
+      if (route !== null) {
+        history.replaceState(null, '', `${basePath}${route.startsWith('/') ? route : `/${route}`}`);
+      }
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
+</html>

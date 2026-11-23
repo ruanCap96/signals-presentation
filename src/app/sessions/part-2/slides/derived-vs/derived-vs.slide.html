@@ -1,0 +1,38 @@
+<div class="toggles">
+  <label>
+    <input
+      type="checkbox"
+      data-testid="invalid"
+      [checked]="invalid()"
+      (change)="setFlag('invalid', $event)"
+    />
+    invalid
+  </label>
+  <label>
+    <input
+      type="checkbox"
+      data-testid="saving"
+      [checked]="saving()"
+      (change)="setFlag('saving', $event)"
+    />
+    saving
+  </label>
+</div>
+<section class="versus">
+  <article class="side">
+    <span class="tag before">Before · RxJS</span>
+    <app-code [code]="rxCode" />
+    <p class="result">
+      <button type="button" data-testid="save-rx" [disabled]="(disabled$ | async) ?? true">
+        Save
+      </button>
+    </p>
+  </article>
+  <article class="side">
+    <span class="tag now">Now · Signal</span>
+    <app-code [code]="signalCode" />
+    <p class="result">
+      <button type="button" data-testid="save-signal" [disabled]="disabled()">Save</button>
+    </p>
+  </article>
+</section>

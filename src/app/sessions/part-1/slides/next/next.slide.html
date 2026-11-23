@@ -1,0 +1,28 @@
+<section class="next-showcase">
+  <div class="next-kicker">
+    <span class="next-pulse"></span>
+    <span>TRANSMISSION 02</span>
+    <span class="next-rule"></span>
+    <span class="next-incoming">INCOMING</span>
+  </div>
+  <div class="next-grid">
+    @for (t of teasers; track t.api; let i = $index) {
+      <article class="next-card">
+        <span class="next-index">0{{ i + 1 }}</span>
+        <div class="next-card-body">
+          <div class="next-category">{{ t.category }}</div>
+          <h2>
+            <code>{{ t.api }}</code>
+          </h2>
+          <p>{{ t.hook }}</p>
+          <app-code [code]="t.code" />
+        </div>
+      </article>
+    }
+  </div>
+  <div class="next-outro">
+    <span class="next-outro-mark">···</span>
+    <span>Four doors. One signal family.</span>
+    <strong>Part 2 is where it gets interesting.</strong>
+  </div>
+</section>

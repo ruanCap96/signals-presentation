@@ -1,0 +1,29 @@
+<main class="slide lab">
+  <header class="slide-head">
+    <h1>Signals lab</h1>
+    <p class="lead">
+      Free-form TypeScript in a Web Worker · <code>signal</code>, <code>computed</code> and
+      <code>log</code> are available
+    </p>
+  </header>
+  <label class="lab-picker">
+    Example
+    <select aria-label="Example" data-testid="example" (change)="choose($event)">
+      @for (ex of examples; track ex.id) {
+        <option [value]="ex.id" [selected]="ex.id === example().id">{{ ex.label }}</option>
+      }
+    </select>
+  </label>
+  @for (ex of [example()]; track ex.id) {
+    <app-code-playground [example]="ex.code" />
+  }
+</main>
+<footer class="controls">
+  <span class="muted">Ctrl/⌘ + Enter runs the code</span>
+  <span class="spacer"></span>
+  <nav class="session-links" aria-label="Sessions">
+    @for (link of links; track link.path) {
+      <a [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
+    }
+  </nav>
+</footer>

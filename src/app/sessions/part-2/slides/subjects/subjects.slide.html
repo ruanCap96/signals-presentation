@@ -1,0 +1,24 @@
+<section class="versus">
+  <article class="side">
+    <span class="tag">Subject</span>
+    <app-code [code]="subjectCode" />
+    <p class="result">
+      Received:
+      <strong data-testid="subject-log">{{ subjectLog().join(', ') || '—' }}</strong>
+    </p>
+  </article>
+  <article class="side">
+    <span class="tag">BehaviorSubject</span>
+    <app-code [code]="behaviorSubjectCode" />
+    <p class="result">
+      Received:
+      <strong data-testid="behavior-log">{{ behaviorLog().join(', ') || '—' }}</strong>
+    </p>
+  </article>
+</section>
+<div class="actions center">
+  <button type="button" data-testid="next" (click)="next()">① next({{ emitted() + 1 }})</button>
+  <button type="button" data-testid="subscribe" [disabled]="subscribed()" (click)="subscribeLate()">
+    ② subscribe()
+  </button>
+</div>

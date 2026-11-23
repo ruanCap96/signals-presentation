@@ -1,0 +1,15 @@
+<app-definition>The difference: <em>Angular is told exactly what changed</em>.</app-definition>
+<section class="compare">
+  @for (s of sides; track s.tag; let i = $index) {
+    <article class="step" [class.step-hidden]="steps.current() < i">
+      <span class="tag" [class]="s.tone">{{ s.tag }}</span>
+      <app-code file="component" [code]="s.component" />
+      <app-code file="template" [code]="s.template" />
+      <ol class="cd-flow" [class]="s.tone" [attr.data-testid]="'flow-' + s.tone">
+        @for (line of s.flow; track line) {
+          <li>{{ line }}</li>
+        }
+      </ol>
+    </article>
+  }
+</section>

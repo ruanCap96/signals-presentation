@@ -1,0 +1,49 @@
+<app-definition
+  >Angular tracks <em>which signals each piece of UI reads</em>, so a change only concerns its
+  readers.</app-definition
+>
+<section class="boxes-stage">
+  <div class="boxes">
+    @for (b of boxes; track b.name) {
+      <button
+        type="button"
+        class="box"
+        [attr.data-testid]="'box-' + b.name"
+        [attr.data-flash]="last()?.box === b.name ? last()!.tick % 2 : null"
+        (click)="change(b)"
+      >
+        <code>{{ b.name }}</code>
+        <span>{{ b.value() }}</span>
+      </button>
+    }
+    <div class="box more" aria-hidden="true"><code>…</code><span>+94 more</span></div>
+  </div>
+
+  <div class="readers step" [class.step-hidden]="steps.current() < 1">
+    <span class="live-tag">LIVE · who reads what</span>
+    @for (r of readers; track r.label) {
+      <article
+        class="reader"
+        [attr.data-testid]="'reader-' + r.label"
+        [attr.data-flash]="last()?.readers?.includes(r.label) ? last()!.tick % 2 : null"
+      >
+        <small>{{ r.label }}</small>
+        <code>{{ r.template }}</code>
+        <strong>{{ r.view() }}</strong>
+      </article>
+    }
+    <p class="verdict" data-testid="verdict" aria-live="polite">
+      @if (last(); as c) {
+        <code>{{ c.box }}</code> changed. Who reads <code>{{ c.box }}</code
+        >?
+        @if (c.readers.length) {
+          <strong>{{ c.readers.join(', ') }}</strong> updates — the rest stays put.
+        } @else {
+          <strong>Nobody here</strong> — nothing else re-runs.
+        }
+      } @else {
+        Click a box to change it.
+      }
+    </p>
+  </div>
+</section>

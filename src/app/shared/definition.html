@@ -1,0 +1,7 @@
+@if (label()) {
+  <span class="tag" [class]="tone()">{{ label() }}</span>
+}
+<p><ng-content /></p>
+<a class="definition-source" [href]="href()" target="_blank" rel="noopener">
+  angular.dev/{{ source() }}
+</a>

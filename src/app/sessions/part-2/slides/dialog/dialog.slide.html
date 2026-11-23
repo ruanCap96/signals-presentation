@@ -1,0 +1,13 @@
+<section class="stage">
+  <app-code [code]="code" />
+  <div class="live flow-col">
+    <span class="pill rx">form.statusChanges</span>
+    <span class="pill rx">store.select(…)</span>
+    <span class="arrow">↓ toSignal</span>
+    <span class="pill">formInvalid() · isLoading()</span>
+    <span class="arrow">↓ computed</span>
+    <span class="pill">isDisabledSubmitButton()</span>
+    <span class="arrow">↓</span>
+    <span class="pill out">[disabled]</span>
+  </div>
+</section>
